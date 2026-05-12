@@ -41,7 +41,7 @@ Nằm trong phần `Playground`, đây là một trò chơi nhỏ giúp người
 
 1. Clone repository này:
    ```bash
-   git clone https://github.com/Hoann0501/web_self_instroduce.git
+   git clone https://github.com/Hoann0501/self-introduce.git
    ```
 2. Mở file `index.html` trực tiếp trên trình duyệt hoặc sử dụng Live Server (VS Code).
 
