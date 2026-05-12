@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Catcher | Mini Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #0a0a0f;
+            --accent: #6c63ff;
+            --accent2: #00d4ff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #e8e8f0;
+            --text2: #8888a0
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        /* Back button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text2);
+            font-family: inherit;
+            font-size: .85rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: .3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .back-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent)
+        }
+
+        /* Game Container */
+        .game-wrapper {
+            text-align: center;
+            width: 100%;
+            max-width: 480px;
+            padding: 0 16px
+        }
+
+        /* Title Screen */
+        .title-screen,
+        .game-over-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px
+        }
+
+        .game-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent
+        }
+
+        .game-subtitle {
+            color: var(--text2);
+            font-size: 1rem;
+            max-width: 320px;
+            line-height: 1.6
+        }
+
+        .game-instructions {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            text-align: left;
+            width: 100%;
+            max-width: 360px
+        }
+
+        .game-instructions h3 {
+            color: var(--accent2);
+            margin-bottom: 12px;
+            font-size: .95rem
+        }
+
+        .game-instructions p {
+            color: var(--text2);
+            font-size: .85rem;
+            line-height: 1.7
+        }
+
+        .game-instructions span.good {
+            color: #4ade80
+        }
+
+        .game-instructions span.bad {
+            color: #f87171
+        }
+
+        .play-btn {
+            padding: 16px 48px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            font-family: inherit;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 25px rgba(108, 99, 255, 0.4);
+            transition: .3s;
+            margin-top: 8px
+        }
+
+        .play-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(108, 99, 255, 0.5)
+        }
+
+        /* HUD */
+        .hud {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 16px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .85rem
+        }
+
+        .hud-score {
+            color: var(--accent2)
+        }
+
+        .hud-lives {
+            color: #f87171
+        }
+
+        .hud-level {
+            color: var(--accent)
+        }
+
+        /* Canvas */
+        #gameCanvas {
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.3);
+            display: block;
+            width: 100%;
+            touch-action: none
+        }
+
+        /* Game Over */
+        .final-score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent2)
+        }
+
+        .final-label {
+            color: var(--text2);
+            font-size: .9rem
+        }
+
+        .high-score {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-top: -8px
+        }
+
+        .hidden {
+            display: none !important
+        }
+
+        /* Stars bg */
+        .stars {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--d) ease-in-out infinite
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: .2
+            }
+
+            50% {
+                opacity: .8
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="back-btn">← Portfolio</a>
+
+    <!-- Stars background -->
+    <div class="stars" id="stars"></div>
+
+    <div class="game-wrapper">
+        <!-- TITLE SCREEN -->
+        <div class="title-screen" id="titleScreen">
+            <div class="game-title">Code Catcher</div>
+            <p class="game-subtitle">Chơi giải trí cùng Hoàn! Bắt các symbol lập trình rơi xuống và né tránh bug 🐛</p>
+            <div class="game-instructions">
+                <h3>🎮 Hướng dẫn</h3>
+                <p>
+                    ← → Di chuyển trái/phải (hoặc chạm màn hình)<br><br>
+                    <span class="good">⭐ 🐍 💻 🧠 ☕</span> = Bắt để ghi điểm<br>
+                    <span class="bad">🐛 💀 🦠</span> = Né tránh! Mất mạng<br><br>
+                    Tốc độ tăng dần theo level. Chúc vui!
+                </p>
+            </div>
+            <button class="play-btn" id="playBtn">▶ Bắt đầu chơi</button>
+        </div>
+
+        <!-- GAME SCREEN -->
+        <div class="hidden" id="gameScreen">
+            <div class="hud">
+                <span class="hud-score">Score: <span id="scoreDisplay">0</span></span>
+                <span class="hud-level">Lv.<span id="levelDisplay">1</span></span>
+                <span class="hud-lives">❤️ <span id="livesDisplay">3</span></span>
+            </div>
+            <canvas id="gameCanvas"></canvas>
+        </div>
+
+        <!-- GAME OVER -->
+        <div class="game-over-screen hidden" id="gameOver">
+            <div class="game-title">Game Over!</div>
+            <p class="final-label">Điểm của bạn</p>
+            <div class="final-score" id="finalScore">0</div>
+            <p class="high-score">Kỷ lục: <span id="highScore">0</span></p>
+            <button class="play-btn" id="replayBtn">Chơi lại</button>
+            <a href="index.html" class="back-btn" style="position:static;margin-top:8px">← Về Portfolio</a>
+        </div>
+    </div>
+
+    <script>
+        // ===== STAR BACKGROUND =====
+        const starsEl = document.getElementById('stars');
+        for (let i = 0; i < 80; i++) {
+            const s = document.createElement('div'); s.className = 'star';
+            s.style.left = Math.random() * 100 + '%'; s.style.top = Math.random() * 100 + '%';
+            s.style.setProperty('--d', (2 + Math.random() * 4) + 's');
+            s.style.animationDelay = Math.random() * 3 + 's';
+            starsEl.appendChild(s);
+        }
+
+        // ===== GAME ENGINE =====
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const titleScreen = document.getElementById('titleScreen');
+        const gameScreen = document.getElementById('gameScreen');
+        const gameOverScreen = document.getElementById('gameOver');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const livesDisplay = document.getElementById('livesDisplay');
+        const levelDisplay = document.getElementById('levelDisplay');
+
+        let W, H, player, items, score, lives, level, spawnTimer, gameLoop, speedMult;
+        const GOOD = ['⭐', '🐍', '💻', '🧠', '☕', '🔥', '🚀'];
+        const BAD = ['🐛', '💀', '🦠'];
+        const PLAYER_EMOJI = '🧑‍💻';
+
+        function resize() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            W = Math.min(460, rect.width); H = W * 1.4;
+            canvas.width = W; canvas.height = H;
+            canvas.style.height = H + 'px';
+        }
+        resize(); window.addEventListener('resize', resize);
+
+        function initGame() {
+            score = 0; lives = 3; level = 1; speedMult = 1; items = []; spawnTimer = 0;
+            player = { x: W / 2, w: 48, emoji: PLAYER_EMOJI };
+            updateHUD();
+        }
+
+        function updateHUD() {
+            scoreDisplay.textContent = score;
+            livesDisplay.textContent = lives;
+            levelDisplay.textContent = level;
+        }
+
+        function spawnItem() {
+            const isGood = Math.random() > 0.25;
+            const pool = isGood ? GOOD : BAD;
+            items.push({
+                x: 30 + Math.random() * (W - 60),
+                y: -30,
+                emoji: pool[Math.floor(Math.random() * pool.length)],
+                speed: (2 + Math.random() * 2) * speedMult,
+                good: isGood,
+                size: 28 + Math.random() * 8
+            });
+        }
+
+        function update() {
+            spawnTimer++;
+            const spawnRate = Math.max(15, 45 - level * 4);
+            if (spawnTimer >= spawnRate) { spawnTimer = 0; spawnItem(); }
+
+            // Update items
+            for (let i = items.length - 1; i >= 0; i--) {
+                const it = items[i];
+                it.y += it.speed;
+
+                // Check collision with player
+                const py = H - 50;
+                if (it.y + it.size > py && it.y < py + 40 && Math.abs(it.x - player.x) < 36) {
+                    if (it.good) {
+                        score += 10 * level;
+                        // Level up every 100 points
+                        const newLvl = Math.floor(score / 100) + 1;
+                        if (newLvl > level) { level = newLvl; speedMult = 1 + level * 0.15; }
+                    } else {
+                        lives--;
+                    }
+                    items.splice(i, 1);
+                    updateHUD();
+                    if (lives <= 0) { endGame(); return; }
+                    continue;
+                }
+
+                // Remove if off screen
+                if (it.y > H + 30) {
+                    items.splice(i, 1);
+                }
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+
+            // Draw grid lines (subtle)
+            ctx.strokeStyle = 'rgba(108,99,255,0.06)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < W; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+            for (let y = 0; y < H; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+            // Draw items
+            items.forEach(it => {
+                ctx.font = it.size + 'px serif';
+                ctx.textAlign = 'center';
+                // Glow for good items
+                if (it.good) {
+                    ctx.shadowColor = 'rgba(0,212,255,0.5)'; ctx.shadowBlur = 12;
+                } else {
+                    ctx.shadowColor = 'rgba(248,113,113,0.5)'; ctx.shadowBlur = 12;
+                }
+                ctx.fillText(it.emoji, it.x, it.y + it.size);
+                ctx.shadowBlur = 0;
+            });
+
+            // Draw player
+            const py = H - 50;
+            ctx.font = '40px serif'; ctx.textAlign = 'center';
+            ctx.shadowColor = 'rgba(108,99,255,0.6)'; ctx.shadowBlur = 20;
+            ctx.fillText(player.emoji, player.x, py + 35);
+            ctx.shadowBlur = 0;
+
+            // Platform glow
+            ctx.beginPath();
+            ctx.arc(player.x, py + 42, 30, 0, Math.PI * 2);
+            const grd = ctx.createRadialGradient(player.x, py + 42, 5, player.x, py + 42, 30);
+            grd.addColorStop(0, 'rgba(108,99,255,0.3)'); grd.addColorStop(1, 'transparent');
+            ctx.fillStyle = grd; ctx.fill();
+        }
+
+        function loop() {
+            update(); draw();
+            gameLoop = requestAnimationFrame(loop);
+        }
+
+        function startGame() {
+            titleScreen.classList.add('hidden');
+            gameOverScreen.classList.add('hidden');
+            gameScreen.classList.remove('hidden');
+            resize(); initGame();
+            gameLoop = requestAnimationFrame(loop);
+        }
+
+        function endGame() {
+            cancelAnimationFrame(gameLoop);
+            gameScreen.classList.add('hidden');
+            gameOverScreen.classList.remove('hidden');
+            document.getElementById('finalScore').textContent = score;
+            const hi = Math.max(score, parseInt(localStorage.getItem('codeCatcherHi') || '0'));
+            localStorage.setItem('codeCatcherHi', hi);
+            document.getElementById('highScore').textContent = hi;
+        }
+
+        // ===== CONTROLS =====
+        const keys = {};
+        document.addEventListener('keydown', e => { keys[e.key] = true; });
+        document.addEventListener('keyup', e => { keys[e.key] = false; });
+
+        // Keyboard movement (in update loop)
+        const origUpdate = update;
+        update = function () {
+            if (keys['ArrowLeft'] || keys['a']) player.x = Math.max(24, player.x - 6);
+            if (keys['ArrowRight'] || keys['d']) player.x = Math.min(W - 24, player.x + 6);
+            origUpdate();
+        };
+
+        // Touch/mouse controls
+        let touching = false;
+        canvas.addEventListener('touchstart', e => { touching = true; movePlayer(e.touches[0]); e.preventDefault(); }, { passive: false });
+        canvas.addEventListener('touchmove', e => { if (touching) movePlayer(e.touches[0]); e.preventDefault(); }, { passive: false });
+        canvas.addEventListener('touchend', () => touching = false);
+        canvas.addEventListener('mousemove', e => {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = W / rect.width;
+            player.x = Math.max(24, Math.min(W - 24, (e.clientX - rect.left) * scaleX));
+        });
+        function movePlayer(touch) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = W / rect.width;
+            player.x = Math.max(24, Math.min(W - 24, (touch.clientX - rect.left) * scaleX));
+        }
+
+        // ===== BUTTONS =====
+        document.getElementById('playBtn').addEventListener('click', startGame);
+        document.getElementById('replayBtn').addEventListener('click', startGame);
+    </script>
+</body>
+
+</html>

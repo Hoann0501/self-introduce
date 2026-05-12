@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio cá nhân - AI Engineer & Software Developer">
+    <title>Hoàn Nguyễn | AI Engineer Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- AOS.js CSS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ========== THREE.JS CANVAS ========== -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- ========== CUSTOM CURSOR ========== -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <!-- ========== LOADING SCREEN ========== -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <span class="loader-text">Loading...</span>
+        </div>
+    </div>
+
+    <!-- ========== FLOATING NAVBAR ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>HN<span class="logo-bracket">/&gt;</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#techstack" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#timeline" class="nav-link">Timeline</a></li>
+                <li><a href="#playground" class="nav-link">Playground</a></li>
+                <li><a href="#certs" class="nav-link">Certs</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <p class="hero-greeting" data-aos="fade-down" data-aos-delay="200">
+                <span class="greeting-line"></span> Xin chào, tôi là
+            </p>
+            <h1 class="hero-name" data-aos="fade-up" data-aos-delay="400">
+                Hoàn <span class="name-highlight">Nguyễn</span>
+            </h1>
+            <div class="hero-typing" data-aos="fade-up" data-aos-delay="600">
+                <span class="typing-prefix">I am a </span>
+                <span class="typing-text" id="typingText"></span>
+                <span class="typing-cursor">|</span>
+            </div>
+            <p class="hero-desc" data-aos="fade-up" data-aos-delay="800">
+                Từ dữ liệu thô đến trí tuệ nhân tạo — tôi biến ý tưởng thành giải pháp thông minh, từng dòng code, từng
+                mô hình AI.
+            </p>
+            <div class="hero-buttons" data-aos="fade-up" data-aos-delay="1000">
+                <a href="#projects" class="btn btn-primary">
+                    <span>Explore My Work</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <span>Liên hệ</span>
+                </a>
+            </div>
+            <div class="hero-stats" data-aos="fade-up" data-aos-delay="1200">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="8">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="6">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Languages</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="3">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">AI Models</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="2">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Years Learning</span>
+                </div>
+            </div>
+        </div>
+        <a href="#about" class="scroll-indicator">
+            <span class="scroll-text">Scroll Down</span>
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </a>
+    </section>
+
+    <!-- ========== ABOUT ME ========== -->
+    <section class="section about" id="about">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                <span class="title-number">01.</span> About Me
+            </h2>
+            <div class="about-grid">
+                <div class="about-image" data-aos="fade-right" data-aos-delay="200">
+                    <div class="image-frame">
+                        <div class="image-placeholder">
+                            <i class="fas fa-user-astronaut"></i>
+                        </div>
+                        <div class="image-border"></div>
+                        <div class="image-dots"></div>
+                    </div>
+                </div>
+                <div class="about-text" data-aos="fade-left" data-aos-delay="400">
+                    <p class="about-desc">
+                        Xin chào! Tôi là <strong>Nguyễn Đức Hoàn</strong> — một sinh viên CNTT đam mê
+                        <strong>Trí tuệ Nhân tạo (AI)</strong> và phát triển phần mềm. Tôi tin rằng AI là chìa khóa
+                        để giải quyết những vấn đề phức tạp nhất của thế giới.
+                    </p>
+                    <p class="about-desc">
+                        Với kiến thức vững chắc về Machine Learning, Deep Learning và Data Science,
+                        tôi đã xây dựng các mô hình AI thực tế — từ dự đoán giá vé máy bay, phân tích
+                        di cư dân số, đến phân loại tiếng khóc trẻ em. Mỗi dự án là một bước tiến
+                        trong hành trình chinh phục thế giới dữ liệu.
+                    </p>
+                    <div class="hobbies">
+                        <h3 class="hobbies-title">Sở thích của tôi</h3>
+                        <div class="hobby-tags">
+                            <span class="hobby-tag" data-aos="zoom-in" data-aos-delay="100">
+                                <i class="fas fa-futbol"></i> Bóng đá
+                            </span>
+                            <span class="hobby-tag" data-aos="zoom-in" data-aos-delay="200">
+                                <i class="fas fa-scissors"></i> Crochet
+                            </span>
+                            <span class="hobby-tag" data-aos="zoom-in" data-aos-delay="300">
+                                <i class="fas fa-music"></i> Âm nhạc
+                            </span>
+                            <span class="hobby-tag" data-aos="zoom-in" data-aos-delay="400">
+                                <i class="fas fa-gamepad"></i> Gaming
+                            </span>
+                            <span class="hobby-tag" data-aos="zoom-in" data-aos-delay="500">
+                                <i class="fas fa-book"></i> Đọc sách
+                            </span>
+                            <span class="hobby-tag" data-aos="zoom-in" data-aos-delay="600">
+                                <i class="fas fa-robot"></i> AI Research
+                            </span>
+                            <span class="hobby-tag" data-aos="zoom-in" data-aos-delay="700">
+                                <i class="fas fa-chart-line"></i> Data Analysis
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TECH STACK ========== -->
+    <section class="section techstack" id="techstack">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                <span class="title-number">02.</span> Tech Stack
+            </h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Ngôn ngữ lập trình, AI/ML frameworks & công nghệ tôi sử dụng
+            </p>
+
+            <!-- Programming Languages -->
+            <h3 class="tech-category" data-aos="fade-up"><i class="fas fa-code"></i> Programming Languages</h3>
+            <div class="tech-grid">
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tech-icon"><i class="fab fa-python"></i></div>
+                    <h3>Python</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="90%"></div>
+                    </div>
+                    <span class="tech-percent">90%</span>
+                </div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="tech-icon"><i class="fab fa-cuttlefish"></i></div>
+                    <h3>C++</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="85%"></div>
+                    </div>
+                    <span class="tech-percent">85%</span>
+                </div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="tech-icon"><i class="fab fa-java"></i></div>
+                    <h3>Java</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="80%"></div>
+                    </div>
+                    <span class="tech-percent">80%</span>
+                </div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="tech-icon"><i class="fas fa-database"></i></div>
+                    <h3>SQL</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="78%"></div>
+                    </div>
+                    <span class="tech-percent">78%</span>
+                </div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="tech-icon"><i class="fab fa-js-square"></i></div>
+                    <h3>JavaScript</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="70%"></div>
+                    </div>
+                    <span class="tech-percent">70%</span>
+                </div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="350">
+                    <div class="tech-icon"><i class="fab fa-html5"></i></div>
+                    <h3>HTML/CSS</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="85%"></div>
+                    </div>
+                    <span class="tech-percent">85%</span>
+                </div>
+            </div>
+
+            <!-- AI / ML -->
+            <h3 class="tech-category" data-aos="fade-up"><i class="fas fa-brain"></i> AI / Machine Learning</h3>
+            <div class="tech-grid">
+                <div class="tech-card ai-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tech-icon"><i class="fas fa-fire"></i></div>
+                    <h3>TensorFlow</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="80%"></div>
+                    </div>
+                    <span class="tech-percent">80%</span>
+                </div>
+                <div class="tech-card ai-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="tech-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>PyTorch</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="75%"></div>
+                    </div>
+                    <span class="tech-percent">75%</span>
+                </div>
+                <div class="tech-card ai-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="tech-icon"><i class="fas fa-cogs"></i></div>
+                    <h3>Scikit-learn</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="85%"></div>
+                    </div>
+                    <span class="tech-percent">85%</span>
+                </div>
+                <div class="tech-card ai-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="tech-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3>Pandas / NumPy</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="88%"></div>
+                    </div>
+                    <span class="tech-percent">88%</span>
+                </div>
+                <div class="tech-card ai-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="tech-icon"><i class="fas fa-project-diagram"></i></div>
+                    <h3>Keras / CNN</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="78%"></div>
+                    </div>
+                    <span class="tech-percent">78%</span>
+                </div>
+                <div class="tech-card ai-card" data-aos="fade-up" data-aos-delay="350">
+                    <div class="tech-icon"><i class="fas fa-eye"></i></div>
+                    <h3>OpenCV</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="72%"></div>
+                    </div>
+                    <span class="tech-percent">72%</span>
+                </div>
+            </div>
+
+            <!-- Tools -->
+            <h3 class="tech-category" data-aos="fade-up"><i class="fas fa-tools"></i> Tools & Platforms</h3>
+            <div class="tech-grid">
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tech-icon"><i class="fab fa-git-alt"></i></div>
+                    <h3>Git / GitHub</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="82%"></div>
+                    </div>
+                    <span class="tech-percent">82%</span>
+                </div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="tech-icon"><i class="fab fa-docker"></i></div>
+                    <h3>Docker</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="65%"></div>
+                    </div>
+                    <span class="tech-percent">65%</span>
+                </div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="tech-icon"><i class="fas fa-flask"></i></div>
+                    <h3>Flask / FastAPI</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="75%"></div>
+                    </div>
+                    <span class="tech-percent">75%</span>
+                </div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="tech-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Google Colab</h3>
+                    <div class="tech-level">
+                        <div class="tech-bar" data-width="90%"></div>
+                    </div>
+                    <span class="tech-percent">90%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROJECTS ========== -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                <span class="title-number">03.</span> Projects
+            </h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Các dự án AI & Software Engineering tiêu biểu
+            </p>
+            <!-- Filter Tabs -->
+            <div class="project-filters" data-aos="fade-up" data-aos-delay="150">
+                <button class="filter-btn active" data-filter="all">Tất cả</button>
+                <button class="filter-btn" data-filter="ai">AI / ML</button>
+                <button class="filter-btn" data-filter="software">Software</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+            </div>
+            <div class="projects-grid">
+                <!-- AI Project 1: Flight Price Prediction -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100" data-category="ai">
+                    <div class="project-badge">AI</div>
+                    <div class="project-image ai-project-bg">
+                        <div class="project-placeholder"><i class="fas fa-plane-departure"></i></div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link" title="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" class="project-link" title="Notebook"><i class="fas fa-book-open"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Flight Price Prediction</h3>
+                        <p class="project-desc">Mô hình AI dự đoán giá vé máy bay dựa trên hãng bay, thời gian, điểm
+                            đến. Sử dụng Random Forest & XGBoost đạt R² = 0.92.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>XGBoost</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- AI Project 2: Population Migration -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200" data-category="ai">
+                    <div class="project-badge">AI</div>
+                    <div class="project-image ai-project-bg">
+                        <div class="project-placeholder"><i class="fas fa-people-arrows"></i></div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link" title="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" class="project-link" title="Report"><i class="fas fa-file-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Population Migration Forecast</h3>
+                        <p class="project-desc">Phân tích và dự đoán xu hướng di cư dân số giữa các vùng, sử dụng LSTM &
+                            time-series analysis trên dữ liệu lịch sử.</p>
+                        <div class="project-tags">
+                            <span>TensorFlow</span><span>LSTM</span><span>Pandas</span><span>Matplotlib</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- AI Project 3: Baby Cry Classifier -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300" data-category="ai">
+                    <div class="project-badge">AI</div>
+                    <div class="project-image ai-project-bg">
+                        <div class="project-placeholder"><i class="fas fa-baby"></i></div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link" title="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" class="project-link" title="Demo"><i class="fas fa-play-circle"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Baby Cry Classifier</h3>
+                        <p class="project-desc">Phân loại tiếng khóc trẻ em (đói, đau, buồn ngủ...) bằng CNN trên
+                            spectrogram âm thanh. Accuracy đạt 89% trên tập test.</p>
+                        <div class="project-tags">
+                            <span>PyTorch</span><span>CNN</span><span>Librosa</span><span>Audio ML</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Software Project 1: Exam Management -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100" data-category="software">
+                    <div class="project-badge">Software</div>
+                    <div class="project-image">
+                        <div class="project-placeholder"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link" title="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" class="project-link" title="Demo"><i
+                                        class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Exam Management System</h3>
+                        <p class="project-desc">Hệ thống quản lý thi trực tuyến với tạo đề tự động, chấm điểm real-time
+                            và dashboard thống kê kết quả chi tiết.</p>
+                        <div class="project-tags">
+                            <span>Java</span><span>SQL Server</span><span>JavaFX</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Software Project 2: Hotel Booking -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200" data-category="software">
+                    <div class="project-badge">Software</div>
+                    <div class="project-image">
+                        <div class="project-placeholder"><i class="fas fa-hotel"></i></div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link" title="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" class="project-link" title="Demo"><i
+                                        class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Hotel Booking System</h3>
+                        <p class="project-desc">Hệ thống đặt phòng khách sạn full-stack với quản lý phòng, thanh toán
+                            online và hệ thống đánh giá.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>Flask</span><span>SQL</span><span>Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Web Project: Portfolio -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300" data-category="web">
+                    <div class="project-badge">Web</div>
+                    <div class="project-image">
+                        <div class="project-placeholder"><i class="fas fa-rocket"></i></div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link" title="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" class="project-link" title="Live"><i
+                                        class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Futuristic Portfolio</h3>
+                        <p class="project-desc">Portfolio cá nhân với Three.js particles 3D, GSAP animations,
+                            glassmorphism và thiết kế futuristic.</p>
+                        <div class="project-tags">
+                            <span>HTML</span><span>CSS</span><span>Three.js</span><span>GSAP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TIMELINE ========== -->
+    <section class="section timeline-section" id="timeline">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                <span class="title-number">04.</span> Timeline
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-date">2023</span>
+                        <h3>🎓 Bắt đầu hành trình CNTT</h3>
+                        <p>Nhập học ngành Công nghệ Thông tin. Học nền tảng lập trình C++, Java và tư duy thuật toán.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-date">2024</span>
+                        <h3>Software Development</h3>
+                        <p>Phát triển Exam Management System (Java) & Hotel Booking System (Python Flask). Nắm vững CSDL
+                            và OOP.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="300">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-date">2025</span>
+                        <h3>Khám phá AI & Machine Learning</h3>
+                        <p>Bắt đầu nghiên cứu AI: xây dựng mô hình dự đoán giá vé máy bay, phân tích di cư dân số bằng
+                            LSTM, và phân loại tiếng khóc trẻ em bằng CNN.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-left" data-aos-delay="400">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-date">2025 - 2026</span>
+                        <h3>Deep Learning & Research</h3>
+                        <p>Đào sâu TensorFlow, PyTorch. Nghiên cứu Computer Vision, NLP và triển khai mô hình AI vào ứng
+                            dụng thực tế.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-right" data-aos-delay="500">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <span class="timeline-date">2026 - Tương lai</span>
+                        <h3>AI Engineer & Beyond</h3>
+                        <p>Mục tiêu trở thành AI Engineer chuyên nghiệp. Tiếp tục nghiên cứu GenAI, LLM và xây dựng các
+                            sản phẩm AI có tác động thực tế.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PLAYGROUND ========== -->
+    <section class="section playground" id="playground">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                <span class="title-number">05.</span> Playground
+            </h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Giải trí một chút với mini-game
+            </p>
+            <div class="playground-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="playground-content">
+                    <div class="game-preview-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="game-info-text">
+                        <h3>Code Catcher v1.0</h3>
+                        <p>Bạn có đủ nhanh để bắt hết các "Clean Code" và né tránh "Bugs" không? Hãy thử thách phản xạ
+                            của mình ngay!</p>
+                        <div class="game-meta">
+                            <span><i class="fas fa-trophy"></i> High Score: <span id="homeHighScore">0</span></span>
+                            <span><i class="fas fa-bolt"></i> Hardcore Mode</span>
+                        </div>
+                        <a href="game.html" class="btn btn-primary">
+                            <span>Play Now</span>
+                            <i class="fas fa-play"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="playground-decoration">
+                    <div class="float-emoji">🐍</div>
+                    <div class="float-emoji">🚀</div>
+                    <div class="float-emoji">💻</div>
+                    <div class="float-emoji">🐛</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CERTIFICATIONS ========== -->
+    <section class="section certs" id="certs">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                <span class="title-number">06.</span> Certifications
+            </h2>
+            <div class="certs-grid">
+                <div class="cert-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="cert-icon"><i class="fab fa-google"></i></div>
+                    <div class="cert-info">
+                        <h4>Professional ML Engineer</h4>
+                        <p>Google Cloud Certification</p>
+                        <span class="cert-date">2025</span>
+                    </div>
+                    <div class="cert-glow"></div>
+                </div>
+                <div class="cert-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="cert-icon"><i class="fas fa-brain"></i></div>
+                    <div class="cert-info">
+                        <h4>Deep Learning Specialization</h4>
+                        <p>DeepLearning.AI / Coursera</p>
+                        <span class="cert-date">2024</span>
+                    </div>
+                    <div class="cert-glow"></div>
+                </div>
+                <div class="cert-card" data-aos="flip-left" data-aos-delay="300">
+                    <div class="cert-icon"><i class="fab fa-aws"></i></div>
+                    <div class="cert-info">
+                        <h4>AWS Certified ML Specialty</h4>
+                        <p>Amazon Web Services</p>
+                        <span class="cert-date">2025</span>
+                    </div>
+                    <div class="cert-glow"></div>
+                </div>
+                <div class="cert-card" data-aos="flip-left" data-aos-delay="400">
+                    <div class="cert-icon"><i class="fas fa-university"></i></div>
+                    <div class="cert-info">
+                        <h4>CS229: Machine Learning</h4>
+                        <p>Stanford Online</p>
+                        <span class="cert-date">2024</span>
+                    </div>
+                    <div class="cert-glow"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                <span class="title-number">07.</span> Contact
+            </h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Hãy kết nối với tôi!
+            </p>
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right" data-aos-delay="200">
+                    <h3>Liên hệ trực tiếp</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>nguyenduchoan0501@email.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Việt Nam</span>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/Hoann0501" class="social-link" title="GitHub"><i
+                                class="fab fa-github"></i></a>
+                        <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://fb.com/nguyen.duc.hoan0501" class="social-link" title="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/dwchn501_" class="social-link" title="Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form" data-aos="fade-left" data-aos-delay="300" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="formName" placeholder=" " required>
+                        <label for="formName">Họ và tên</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="formEmail" placeholder=" " required>
+                        <label for="formEmail">Email</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="formMessage" rows="5" placeholder=" " required></textarea>
+                        <label for="formMessage">Tin nhắn</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-submit">
+                        <span>Gửi tin nhắn</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <p>Designed & Built by <strong>Hoàn Nguyễn</strong></p>
+            <p class="footer-year">© 2026. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ========== CDN Scripts ========== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+
+</html>
