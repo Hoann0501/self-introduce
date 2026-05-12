@@ -1,4 +1,4 @@
-# 🚀 Futuristic AI Portfolio & Playground
+# Futuristic AI Portfolio & Playground
 
 [![Personal Portfolio](https://img.shields.io/badge/Portfolio-Live-brightgreen?style=for-the-badge&logo=google-chrome)](https://github.com/Hoann0501)
 [![AI Engineer](https://img.shields.io/badge/Role-AI_Engineer-blue?style=for-the-badge&logo=python)](https://github.com/Hoann0501)
